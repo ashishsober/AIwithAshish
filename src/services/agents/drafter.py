@@ -150,17 +150,18 @@ tools_node = ToolNode(tools=tools)
 graph.add_node('tools', tools_node)
 
 graph.add_edge(START, "agent")
+graph.add_edge("agent", "tools")
+
 graph.add_conditional_edges(
-    "agent", 
+    "tools", 
     should_continue,
     {
-        "continue": "tools",
+        "continue": "agent",
         "end": END
     })
-graph.add_edge("tools", "agent")
 
 app = graph.compile()
-# show_graph(app, "drafter.png")
+show_graph(app, "drafter.png")
 
 
 def run_doc_agent(state: AgentState) -> dict:
