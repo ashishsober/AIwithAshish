@@ -41,6 +41,7 @@ def save(filename:str) -> str:
      Args:
         filename (str): The name of the file to save the document content to.
     """
+    print(f"Saving document to {filename}...")
     with open(filename, "w") as f:
         f.write(document_content)
     return f" Document has been saved successfully to {filename}"
@@ -130,17 +131,14 @@ def should_continue(state: AgentState) -> str:
     messages = state['messages']
     if not messages:
         return "continue"
-    
-    last_message = state['messages'][-1]
-    tool_calls = getattr(last_message, "tool_calls", None) or getattr(last_message, "additional_kwargs", {}).get("tool_calls", [])
-    print(f"Tool calls: {tool_calls}")
 
-    # for msg in reversed(messages):
-    #     tool_calls = getattr(msg, "tool_calls", None) or msg.additional_kwargs.get("tool_calls", [])
-    if tool_calls:
-        for tool_call in tool_calls:
-            if _tool_name(tool_call) == 'save':
-                return "end"
+    # last_message = messages[-1]
+    recent_tool_message = next((msg for msg in reversed(messages) if isinstance(msg, ToolMessage)), None)
+    if recent_tool_message is not None:
+        # tool_call = getattr(recent_tool_message, "tool_calls", None) or getattr(recent_tool_message, "additional_kwargs", {}).get("tool_calls", [])
+        print(f" ⚠️ ⚠️ Tool message recent one: {recent_tool_message}")
+        if _tool_name(recent_tool_message) == 'save':
+            return "end"
                 
     return "continue"
 

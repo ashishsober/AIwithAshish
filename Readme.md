@@ -76,3 +76,55 @@ s            # step in
 p <variable> # print variable
 c            # continue
 ```
+
+| Type           | Emoji   | Example Usage                              |
+| -------------- | ------- | ------------------------------------------ |
+| Info           | ℹ️      | `print("ℹ️ Info: Starting service...")`    |
+| Success        | ✅       | `print("✅ WebSocket connected")`           |
+| Warning        | ⚠️      | `print("⚠️ High memory usage detected")`   |
+| Error          | ❌      | `print("❌ Failed to fetch data")`          |
+| Critical       | 🔥      | `print("🔥 System overload")`              |
+| Debug          | 🐞      | `print("🐞 Debug: packet =", packet)`      |
+| Ping/Pong      | 📡 / 🏓 | `print("🏓 Pong received from server")`    |
+| Connecting     | 🌐      | `print("🌐 Connecting to WebSocket...")`   |
+| Reconnecting   | ♻️      | `print("♻️ Reconnecting...")`              |
+| Disconnect     | 🔌      | `print("🔌 WebSocket disconnected")`       |
+| Cleanup        | 🧹      | `print("🧹 Cleaning up resources")`        |
+| Subscribed     | 📬      | `print("📬 Subscribed to ticker XYZ")`     |
+| Unsubscribed   | 📭      | `print("📭 Unsubscribed from ticker XYZ")` |
+| Packet Decoded | 📦      | `print("📦 Decoded packet:", packet)`      |
+| Retry Attempt  | 🔁      | `print(f"🔁 Attempt {n}/5 to reconnect")`  |
+| Timestamp      | 🕒      | `print("🕒 Received at:", timestamp)`      |
+| File Read      | 📄      | `print("📄 Loaded tickers.txt")`           |
+| Market Closed  | 🛑      | `print("🛑 Market closed")`                |
+| Market Up      | 📈      | `print("📈 Price moving up")`              |
+| Market Down    | 📉      | `print("📉 Price moving down")`            |
+| Bullish Move   | 🟢      | `print("🟢 Bullish crossover detected")`   |
+| Bearish Move   | 🔻      | `print("🔻 Bearish crossover detected")`   |
+🔻
+🔔
+ # 🔒 ACQUIRE LOCK
+ | Type                | Emoji   | Example Usage                                      |
+|---------------------|---------|----------------------------------------------------|
+| Trade Executed      | 🛒      | `print("🛒 Trade executed at price", price)`        |
+| Trade Rejected      | 🚫      | `print("🚫 Trade rejected")`                        |
+| Trade Pending       | ⏳      | `print("⏳ Trade pending confirmation")`            |
+| Profit              | 💰      | `print("💰 Profit booked:", profit)`                |
+| Loss                | 💸      | `print("💸 Loss incurred:", loss)`                  |
+| Watchlist           | 👀      | `print("👀 Watching symbol:", symbol)`              |
+| Alert               | 🚨      | `print("🚨 Price alert triggered!")`                |
+| Settings/Config     | ⚙️      | `print("⚙️ Loading config...")`                    |
+| Chart/Graph         | 📊      | `print("📊 Chart updated")`                        |
+| Calculation         | 🧮      | `print("🧮 Calculating indicators...")`             |
+| API Call            | 🌐      | `print("🌐 API request sent")`                      |
+| Database            | 🗄️      | `print("🗄️ Writing to database")`                   |
+| Save/Write          | 💾      | `print("💾 Data saved")`                            |
+| Loading             | ⏱️      | `print("⏱️ Loading data...")`                      |
+| Refresh/Update      | 🔄      | `print("🔄 Data refreshed")`                        |
+| Star/Favorite       | ⭐      | `print("⭐ Favorite symbol added")`                  |
+| Question/Help       | ❓      | `print("❓ Need help?")`                            |
+| Up Arrow            | ⬆️      | `print("⬆️ Price breakout detected")`               |
+| Down Arrow          | ⬇️      | `print("⬇️ Price breakdown detected")`              |
+| Pause               | ⏸️      | `print("⏸️ Pausing trading...")`                    |
+| Resume              | ▶️      | `print("▶️ Resuming trading...")`                   |
+| Lock/Unlock         | 🔒/🔓   | `print("🔒 Lock acquired")` / `print("🔓 Lock released")` |

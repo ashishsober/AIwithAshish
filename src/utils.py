@@ -71,7 +71,7 @@ def print_message(messages):
                 if key in seen_tool_outputs:
                     continue
                 seen_tool_outputs.add(key)
-                print(f"\nTool Result: {content}")
+                print(f"\n🟢 Tool Result: {content}")
 
 
 
