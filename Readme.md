@@ -43,8 +43,6 @@ brew services start postgresql@14
 psql --version
 ```
 
-> Default superuser password: `Testing@123`
-
 ### Azure OpenAI API Key
 
 ```bash
