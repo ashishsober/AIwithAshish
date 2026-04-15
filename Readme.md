@@ -1,44 +1,65 @@
 
-## How to run postgress
-    > brew services start postgresql
-    brew services start postgresql@14
-    psql --version
-    postgres pwd : Testing@123 (super user)
-    [text](../../../../opt/homebrew/lib/python3.13.3/site-packages)
-    [text](../../../../opt/homebrew)
+# AIwithAshish
 
-## AI/ML 
+## Tech Stack
 
-   Backend --- Fast API to build the api(done)
-   LangGraph ----  orchestrate the AI agentc(done)
-   Groq ---- for fast and free LLM inference
-   Jina ----  AI for embeddings
-   postgres sql for PGVector our database and vector search
-   vercel --- we can host it for free
+### AI/ML
 
-    Infra: AWS free tier ($200 credits)
-    DevOps: OpenTofu, CircleCI / GitHub Actions, GitHub, Docker
-    Quality: Sentry, Opik, CloudWatch, Ruff, MyPy
+| Component   | Technology                                          |
+|-------------|-----------------------------------------------------|
+| Backend     | FastAPI                                             |
+| Orchestration | LangGraph — orchestrate the AI agents             |
+| Inference   | Groq — fast and free LLM inference                 |
+| Embeddings  | Jina AI                                             |
+| Database    | PostgreSQL with PGVector for vector search          |
+| Hosting     | Vercel (free tier)                                  |
 
-    ![alt text](image.png)
+### Infrastructure & DevOps
 
-    ![alt text](image-1.png)
-    
-    ![alt text](image-2.png)
+| Area    | Tools                                               |
+|---------|-----------------------------------------------------|
+| Infra   | AWS free tier ($200 credits)                        |
+| DevOps  | OpenTofu, CircleCI / GitHub Actions, GitHub, Docker |
+| Quality | Sentry, Opik, CloudWatch, Ruff, MyPy                |
 
-    # React agent screenshot
-    ![alt text](static/reactagent.png)
+## Screenshots
 
-## open api. key
+![Graph](static/image.png)
+
+![Graph 2](static/image-1.png)
+
+![Graph 3](static/image-2.png)
+
+### React Agent
+
+![React Agent](static/reactagent.png)
+
+## Setup
+
+### PostgreSQL
+
+```bash
+brew services start postgresql@14
+psql --version
+```
+
+> Default superuser password: `Testing@123`
+
+### Azure OpenAI API Key
+
+```bash
 echo 'export AZURE_OPENAI_API_KEY="api_key"' >> ~/.zshrc
 source ~/.zshrc
+```
 
- https://platform.openai.com/
- https://platform.openai.com/api-keys
+- Dashboard: https://platform.openai.com/
+- API Keys: https://platform.openai.com/api-keys
 
+## Debugging
 
- Then use:
-    n (next)
-    s (step in)
-    p variable_name
-    c (continue)
+```
+n            # next
+s            # step in
+p <variable> # print variable
+c            # continue
+```
