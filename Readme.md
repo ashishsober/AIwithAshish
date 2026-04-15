@@ -9,11 +9,12 @@ This platform supports multiple agent types including a React agent, a drafter a
 
 **Key Features:**
 - Multi-agent orchestration with LangGraph
-- Conditional and multi-route workflow graphs
-- Groq-powered fast LLM inference
-- Vector search capabilities with PGVector
-- React-based agent visualization
-- Production-ready with monitoring and logging
+- Conditional workflow graphs
+- Looping workflow graphs
+- Multi-route workflow graphs
+- React agent implementation
+- Drafter agent implementation
+- Azure OpenAI integration
 
 ## Tech Stack
 
