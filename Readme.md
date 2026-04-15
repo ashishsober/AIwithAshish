@@ -1,6 +1,20 @@
 
 # AIwithAshish
 
+## Project Description
+
+AIwithAshish is an intelligent agent orchestration platform that leverages advanced AI/ML technologies to build and deploy sophisticated multi-agent systems. The project combines LangGraph for workflow orchestration, FastAPI for backend services, and cutting-edge LLM inference to create intelligent agents capable of complex decision-making and task execution.
+
+This platform supports multiple agent types including a React agent, a drafter agent, and custom Azure OpenAI-powered agents. It enables conditional routing, looping workflows, and multi-route graph execution for flexible and powerful agent behavior. The system is designed to scale efficiently using cloud infrastructure and is production-ready with comprehensive quality assurance tools.
+
+**Key Features:**
+- Multi-agent orchestration with LangGraph
+- Conditional and multi-route workflow graphs
+- Groq-powered fast LLM inference
+- Vector search capabilities with PGVector
+- React-based agent visualization
+- Production-ready with monitoring and logging
+
 ## Tech Stack
 
 ### AI/ML
