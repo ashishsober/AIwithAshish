@@ -1,0 +1,143 @@
+User: Give me a release notes template containing feature number, user story number, summary of the changes, use cases, impacted modules.
+AI: Certainly! Here's a structured release notes template that you can use for documenting changes in your software projects. Each section is designed to help stakeholders understand the updates clearly.
+
+---
+
+# Release Notes
+
+## Version: [Version Number]
+### Release Date: [Release Date]
+
+---
+
+### Feature Number: [Feature Number]
+- **User Story Number:** [User Story Number]
+- **Summary of Changes:**
+  - [Brief description of what the change entails]
+  
+- **Use Cases:**
+  1. [Use Case 1 Title]
+     - [Description of how this feature will be used]
+  2. [Use Case 2 Title]
+     - [Description of how this feature will be used]
+  3. [Use Case 3 Title]
+     - [Description of how this feature will be used]
+  
+- **Impacted Modules:**
+  - [Module 1 Name]
+  - [Module 2 Name]
+  - [Module 3 Name]
+
+---
+
+### Feature Number: [Feature Number]
+- **User Story Number:** [User Story Number]
+- **Summary of Changes:**
+  - [Brief description of what the change entails]
+  
+- **Use Cases:**
+  1. [Use Case 1 Title]
+     - [Description of how this feature will be used]
+  2. [Use Case 2 Title]
+     - [Description of how this feature will be used]
+  3. [Use Case 3 Title]
+     - [Description of how this feature will be used]
+
+- **Impacted Modules:**
+  - [Module 1 Name]
+  - [Module 2 Name]
+  - [Module 3 Name]
+
+---
+
+### Additional Notes:
+- [Any additional information, known issues, or future considerations]
+
+---
+
+### Known Issues:
+- [List any known issues with this release]
+
+### Upcoming Features:
+- [Describe any planned features that are in development or future releases]
+
+---
+
+### Contact Information:
+- **Prepared by:** [Your Name]
+- **Contact:** [Your Email or Contact Information]
+
+---
+
+Feel free to duplicate the "Feature Number" section as needed for each feature released in the version, and customize it to fit your project's specific requirements.
+AI: Certainly! Here's a structured release notes template that you can use for documenting changes in your software projects. Each section is designed to help stakeholders understand the updates clearly.
+
+---
+
+# Release Notes
+
+## Version: [Version Number]
+### Release Date: [Release Date]
+
+---
+
+### Feature Number: [Feature Number]
+- **User Story Number:** [User Story Number]
+- **Summary of Changes:**
+  - [Brief description of what the change entails]
+  
+- **Use Cases:**
+  1. [Use Case 1 Title]
+     - [Description of how this feature will be used]
+  2. [Use Case 2 Title]
+     - [Description of how this feature will be used]
+  3. [Use Case 3 Title]
+     - [Description of how this feature will be used]
+  
+- **Impacted Modules:**
+  - [Module 1 Name]
+  - [Module 2 Name]
+  - [Module 3 Name]
+
+---
+
+### Feature Number: [Feature Number]
+- **User Story Number:** [User Story Number]
+- **Summary of Changes:**
+  - [Brief description of what the change entails]
+  
+- **Use Cases:**
+  1. [Use Case 1 Title]
+     - [Description of how this feature will be used]
+  2. [Use Case 2 Title]
+     - [Description of how this feature will be used]
+  3. [Use Case 3 Title]
+     - [Description of how this feature will be used]
+
+- **Impacted Modules:**
+  - [Module 1 Name]
+  - [Module 2 Name]
+  - [Module 3 Name]
+
+---
+
+### Additional Notes:
+- [Any additional information, known issues, or future considerations]
+
+---
+
+### Known Issues:
+- [List any known issues with this release]
+
+### Upcoming Features:
+- [Describe any planned features that are in development or future releases]
+
+---
+
+### Contact Information:
+- **Prepared by:** [Your Name]
+- **Contact:** [Your Email or Contact Information]
+
+---
+
+Feel free to duplicate the "Feature Number" section as needed for each feature released in the version, and customize it to fit your project's specific requirements.

@@ -1,0 +1,14 @@
+[
+    {"role": "system", "content": "You are my AI assistant. Please answer my query to the best of your ability."
+    },
+    {"role": "user", "content": "What is 2 + 2?"
+    },
+    {"role": "assistant", "content": "", "tool_calls": [
+            {"name": "add", "args": {"a": 2, "b": 2
+                }, "id": "call_PqnzbHmjOMgAkqPXId5cUQNF", "type": "tool_call"
+            }
+        ]
+    },
+    {"role": "tool", "content": "4", "tool_call_id": "call_PqnzbHmjOMgAkqPXId5cUQNF"
+    }
+]
