@@ -1,7 +1,8 @@
 langgraph
 langchain-core
 IPython
-dotenv
+python-dotenv
 langchain_openai
 langchain_ollama
 openai
+Flask
