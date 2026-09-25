@@ -11,10 +11,13 @@ from src.qwen_client import ask_qwen
 app = Flask(__name__, static_folder=str(ROOT_DIR / "frontend" / "dist"), static_url_path="")
 
 
-@app.route("/api/chat", methods=["POST"])
+@app.route("/api/chat", methods=["GET", "POST"])
 def chat_api():
-    payload = request.get_json(silent=True) or {}
-    prompt = (payload.get("prompt") or payload.get("context") or "").strip()
+    if request.method == "GET":
+        prompt = request.args.get("prompt", "").strip()
+    else:
+        payload = request.get_json(silent=True) or {}
+        prompt = (payload.get("prompt") or payload.get("context") or "").strip()
 
     if not prompt:
         return jsonify({"error": "Prompt is required."}), 400

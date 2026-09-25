@@ -128,3 +128,7 @@ c            # continue
 | Pause               | ⏸️      | `print("⏸️ Pausing trading...")`                    |
 | Resume              | ▶️      | `print("▶️ Resuming trading...")`                   |
 | Lock/Unlock         | 🔒/🔓   | `print("🔒 Lock acquired")` / `print("🔓 Lock released")` |
+
+
+£ To see the port
+lsof -nP -iTCP:11434 -sTCP:LISTEN
