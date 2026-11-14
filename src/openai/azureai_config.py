@@ -15,7 +15,7 @@ api_version = "2024-12-01-preview"
 def get_qwen_client() -> OpenAI:
     """Create the OpenAI-compatible client for local Qwen via Ollama."""
     return OpenAI(
-        base_url="http://localhost:11434/v1",
+        base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1"),
         api_key="ollama",
     )
 

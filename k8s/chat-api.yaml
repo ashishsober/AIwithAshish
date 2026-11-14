@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-api
+  labels:
+    app: chat-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-api
+  template:
+    metadata:
+      labels:
+        app: chat-api
+    spec:
+      containers:
+        - name: chat-api
+          image: chat-api:latest
+          imagePullPolicy: Never   # image is built directly into minikube
+          ports:
+            - containerPort: 5002
+          env:
+            - name: OLLAMA_BASE_URL
+              value: "http://host.minikube.internal:11434/v1"   # Ollama running on the host Mac
+            - name: QWEN_MODEL
+              value: "qwen3:30b-a3b"
+          readinessProbe:
+            tcpSocket:
+              port: 5002
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 5002
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-api
+spec:
+  selector:
+    app: chat-api
+  ports:
+    - port: 5002
+      targetPort: 5002

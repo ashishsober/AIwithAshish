@@ -132,3 +132,11 @@ c            # continue
 
 £ To see the port
 lsof -nP -iTCP:11434 -sTCP:LISTEN
+
+
+# reach it from your Mac (a port-forward to 8080 is open right now)
+kubectl port-forward svc/chat-api 8080:5002
+curl -X POST localhost:8080/api/chat -H 'Content-Type: application/json' -d '{"prompt":"hi"}'
+
+# redeploy after code changes
+minikube image build -t chat-api:latest . && kubectl rollout restart deploy/chat-api
