@@ -20,6 +20,12 @@ spec:
           imagePullPolicy: Never   # image is built directly into minikube
           ports:
             - containerPort: 5002
+          # Chat history DB login (CHAT_DB_HOST/USER/PASSWORD), made by setup/bootstrap.sh. Optional: without
+          # it the pod still answers questions and keeps no history.
+          envFrom:
+            - secretRef:
+                name: chat-secrets
+                optional: true
           env:
             - name: OLLAMA_BASE_URL
               value: "http://host.minikube.internal:11434/v1"   # Ollama running on the host Mac

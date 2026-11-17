@@ -140,3 +140,27 @@ curl -X POST localhost:8080/api/chat -H 'Content-Type: application/json' -d '{"p
 
 # redeploy after code changes
 minikube image build -t chat-api:latest . && kubectl rollout restart deploy/chat-api
+
+## Qwen Chat history (per signed-in user)
+
+chat-api saves each signed-in person's chats in MySQL `chat_db` and sends the chat so far to the model
+as context (newest messages first, up to `CHAT_CONTEXT_CHARS`, default 60,000 characters).
+nginx passes the person as `X-Auth-User-Id`; everyone sees only their own chats. On the LAN address
+(:8080, no sign-in) nothing is saved and the page sends the chat for context itself.
+
+| Endpoint | |
+|---|---|
+| `POST /api/chat` `{prompt, conversation_id?}` | ask; no `conversation_id` starts a new chat |
+| `GET /api/chat/conversations` | your chats, newest first |
+| `GET /api/chat/conversations/<id>` | one chat with its messages |
+| `PATCH /api/chat/conversations/<id>` `{title}` | rename |
+| `DELETE /api/chat/conversations/<id>` | delete |
+
+One-time setup (asks for the MySQL root password, prints no secrets): `setup/bootstrap.sh`
+creates `chat_db` (sql/001_chat_db.sql), the MySQL user `chat_api` and the Secret `chat-secrets`.
+Without that Secret the pod still answers and keeps nothing.
+
+Also needed once: the route rules in ai-authorization-api `sql/003_chat_history_routes.sql`, and the
+`location /api/chat/` block in nginx's aisoup-locations.conf.
+
+Tests (no MySQL or model needed): `python -m pytest -q tests`

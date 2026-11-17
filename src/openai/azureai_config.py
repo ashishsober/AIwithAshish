@@ -30,13 +30,20 @@ def get_azure_client():
     return get_qwen_client()
 
 
-def chat_with_qwen(prompt: str, model: str = DEPLOYMENT, temperature: float = 0.7, max_tokens: int = 4096) -> str:
-    """Send a prompt to the Qwen model and return the generated text."""
+def chat_with_messages(messages: list, model: str = DEPLOYMENT, temperature: float = 0.7, max_tokens: int = 4096) -> str:
+    """Send a conversation ([{"role": "user" | "assistant", "content": ...}, ...], ending with the new
+    question) to the Qwen model and return the generated reply."""
     client = get_qwen_client()
     response = client.chat.completions.create(
         model=model,
-        messages=[{"role": "user", "content": prompt}],
+        messages=messages,
         temperature=temperature,
         max_tokens=max_tokens,
     )
     return response.choices[0].message.content or ""
+
+
+def chat_with_qwen(prompt: str, model: str = DEPLOYMENT, temperature: float = 0.7, max_tokens: int = 4096) -> str:
+    """Send a prompt to the Qwen model and return the generated text."""
+    return chat_with_messages([{"role": "user", "content": prompt}], model=model,
+                              temperature=temperature, max_tokens=max_tokens)
