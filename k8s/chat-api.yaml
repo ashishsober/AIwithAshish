@@ -29,8 +29,9 @@ spec:
           env:
             - name: OLLAMA_BASE_URL
               value: "http://host.minikube.internal:11434/v1"   # Ollama running on the host Mac
+            # Must be pulled on the Mac first (ollama pull <name>); to go back, put the old name here and push
             - name: QWEN_MODEL
-              value: "qwen3:30b-a3b"
+              value: "qwen3.6:35b-a3b"
             # authz-api says who is a super admin (no daily limit; Admin > Qwen Chat plans). The token is shared
             # through the authz-internal Secret, as for auth-api. Optional: without it, plans apply to everyone
             # and the admin endpoints answer 503.
