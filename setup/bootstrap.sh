@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One-time setup on the Mac for Qwen Chat history (chat-api). Safe to re-run. Prints no secret values.
-#   1. creates the chat_db database and its tables (sql/001_chat_db.sql)
+#   1. creates the chat_db database and its tables (sql/001_chat_db.sql, sql/002_chat_plans.sql)
 #   2. creates the MySQL user chat_api (only SELECT/INSERT/UPDATE/DELETE on chat_db) with a new random password
 #   3. creates the Kubernetes Secret chat-secrets (CHAT_DB_HOST/USER/PASSWORD) and restarts chat-api
 # Asks once for the MySQL admin password. Needs auth-api set up first (it reuses auth-secrets' DB host).
@@ -19,7 +19,7 @@ trap 'rm -f "$tmp_sql" "$tmp_env"' EXIT
 
 pw="$(openssl rand -hex 16)"
 {
-  cat "$REPO/sql/001_chat_db.sql"
+  cat "$REPO/sql/001_chat_db.sql" "$REPO/sql/002_chat_plans.sql"
   echo "CREATE USER IF NOT EXISTS 'chat_api'@'%' IDENTIFIED BY '$pw';"
   echo "ALTER USER 'chat_api'@'%' IDENTIFIED BY '$pw';"
   echo "GRANT SELECT, INSERT, UPDATE, DELETE ON chat_db.* TO 'chat_api'@'%';"

@@ -31,6 +31,17 @@ spec:
               value: "http://host.minikube.internal:11434/v1"   # Ollama running on the host Mac
             - name: QWEN_MODEL
               value: "qwen3:30b-a3b"
+            # authz-api says who is a super admin (no daily limit; Admin > Qwen Chat plans). The token is shared
+            # through the authz-internal Secret, as for auth-api. Optional: without it, plans apply to everyone
+            # and the admin endpoints answer 503.
+            - name: AUTHZ_API_URL
+              value: "http://authz-api:7100"
+            - name: AUTHZ_INTERNAL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: authz-internal
+                  key: token
+                  optional: true
           readinessProbe:
             tcpSocket:
               port: 5002

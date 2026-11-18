@@ -163,4 +163,41 @@ Without that Secret the pod still answers and keeps nothing.
 Also needed once: the route rules in ai-authorization-api `sql/003_chat_history_routes.sql`, and the
 `location /api/chat/` block in nginx's aisoup-locations.conf.
 
+## Qwen Chat plans and daily limits
+
+Each signed-in person may ask their plan's number of questions a day and a week; a question needs room in both.
+Days start at midnight (India time); weeks run Monday to Sunday. A question over a limit gets **429** with a
+message, and is never sent to the model. A question
+the model fails to answer is not counted. Deleting chats does not give questions back.
+
+| Plan | A day | A week | |
+|---|---|---|---|
+| Free | 25 | 100 | everyone starts here |
+| Plus | 100 | 400 | ask for it on the Upgrade plan page |
+| Pro | 300 | 1,200 | ask for it on the Upgrade plan page |
+
+Change a limit in MySQL, e.g. `UPDATE chat_db.plans SET daily_questions = 50, weekly_questions = 200 WHERE code = 'free';`
+(NULL = no limit of that kind). The usage page also warns when, at the person's current pace, a limit would run
+out before it resets. **Super admins have no limit** (chat-api asks authz-api, using the `authz-internal`
+Secret). There are no payments: a request waits until a super admin approves it in the app's
+Admin > Qwen Chat plans, where they can also put anyone on any plan. nginx's 10 questions a minute still applies.
+
+| Endpoint | |
+|---|---|
+| `GET /api/chat/usage` | your plan, today and this week against the limits, the pace warning, questions per day for 30 days, saved chats |
+| `GET /api/chat/plans` | the plans, yours, and your latest request |
+| `POST /api/chat/plan-requests` `{plan, note?}` | ask for a bigger plan (replaces a pending request) |
+| `DELETE /api/chat/plan-requests/current` | cancel your pending request |
+| `GET /api/chat/admin/overview` | super admins: plans, requests, everyone's plan and usage |
+| `POST /api/chat/admin/plan-requests/<id>/decision` `{approve}` | approve or decline |
+| `PUT /api/chat/admin/users/<user_id>/plan` `{plan}` | put someone on a plan |
+
+Admin changes need the header `X-Requested-With: AITradeSoup`.
+
+Set up once on an existing install (both as MySQL root, then deploy chat-api as usual):
+```bash
+mysql -u root -p < sql/002_chat_plans.sql                                        # tables, plans, past questions
+mysql -u root -p < ../ai-authorization-api/sql/004_chat_plan_admin_routes.sql   # /api/chat/admin/ = super admins
+```
+
 Tests (no MySQL or model needed): `python -m pytest -q tests`
