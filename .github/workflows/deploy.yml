@@ -1,0 +1,70 @@
+name: Deploy chat-api
+
+on:
+  push:
+    branches: [main]
+    # Only deploy when something baked into the image (or the deployment) changes
+    paths:
+      - app.py
+      - src/**
+      - Dockerfile
+      - k8s/**
+      - .github/workflows/deploy.yml
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-chat-api
+  cancel-in-progress: false
+
+# launchd services start with a minimal PATH; make docker/minikube/kubectl visible
+env:
+  PATH: /opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+jobs:
+  build:
+    # Runs on the self-hosted runner installed on the machine that hosts minikube (~/actions-runner-ai-chat)
+    runs-on: [self-hosted, macOS]
+    outputs:
+      image: ${{ steps.tag.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute image tag
+        id: tag
+        run: echo "image=chat-api:v${{ github.run_number }}-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Build image inside minikube
+        run: |
+          eval $(minikube docker-env)
+          DOCKER_BUILDKIT=0 docker build -t "${{ steps.tag.outputs.image }}" -f Dockerfile .
+
+  deploy:
+    needs: build
+    runs-on: [self-hosted, macOS]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the Secrets
+        run: |
+          # Both are optional for the pod (it still answers without them), so only warn
+          kubectl get secret chat-secrets >/dev/null 2>&1 \
+            || echo "::warning::Secret chat-secrets is missing: no chat history or plans (run setup/bootstrap.sh)"
+          kubectl get secret authz-internal >/dev/null 2>&1 \
+            || echo "::warning::Secret authz-internal is missing: nobody counts as a super admin (no unlimited, no plan admin)"
+
+      - name: Deploy to minikube
+        run: |
+          kubectl apply -f k8s/chat-api.yaml
+          kubectl set image deployment/chat-api chat-api="${{ needs.build.outputs.image }}"
+          kubectl rollout status deployment/chat-api --timeout=180s
+
+      - name: Summary
+        if: always()
+        run: |
+          image=$(kubectl get deployment chat-api -o jsonpath='{.spec.template.spec.containers[0].image}')
+          ready=$(kubectl get deployment chat-api -o jsonpath='{.status.readyReplicas}/{.spec.replicas}')
+          {
+            echo "| Service | Image | Ready |"
+            echo "|---|---|---|"
+            echo "| chat-api | \`$image\` | $ready |"
+          } >> "$GITHUB_STEP_SUMMARY"

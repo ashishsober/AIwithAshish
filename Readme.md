@@ -138,8 +138,24 @@ lsof -nP -iTCP:11434 -sTCP:LISTEN
 kubectl port-forward svc/chat-api 8080:5002
 curl -X POST localhost:8080/api/chat -H 'Content-Type: application/json' -d '{"prompt":"hi"}'
 
-# redeploy after code changes
+# redeploy after code changes: push to main (the runner below deploys), or by hand:
 minikube image build -t chat-api:latest . && kubectl rollout restart deploy/chat-api
+
+## Deploy on push (self-hosted runner)
+
+`.github/workflows/deploy.yml` runs on this Mac's runner (`~/actions-runner-ai-chat`) on every push to main that
+changes app.py, src/, the Dockerfile, k8s/ or the workflow (or by hand: Actions > Deploy chat-api > Run workflow).
+It builds `chat-api:v<run>-<sha>` inside minikube, applies k8s/chat-api.yaml, sets the image and waits for the
+rollout. The launchd port-forward (127.0.0.1:5050) reconnects by itself a few seconds after.
+
+Register the runner once (token: GitHub > AIwithAshish > Settings > Actions > Runners > New self-hosted runner,
+valid for an hour):
+```bash
+mkdir -p ~/actions-runner-ai-chat && cd ~/actions-runner-ai-chat
+tar xzf ~/actions-runner-ai-authz/actions-runner-osx-arm64-*.tar.gz
+./config.sh --url https://github.com/ashishsober/AIwithAshish --token <TOKEN> --name Ashishs-Mac-Studio --unattended
+./svc.sh install && ./svc.sh start
+```
 
 ## Qwen Chat history (per signed-in user)
 
