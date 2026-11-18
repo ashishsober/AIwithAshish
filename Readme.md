@@ -143,7 +143,7 @@ minikube image build -t chat-api:latest . && kubectl rollout restart deploy/chat
 
 ## Deploy on push (self-hosted runner)
 
-`.github/workflows/deploy.yml` runs on this Mac's runner (`~/actions-runner-ai-chat`) on every push to main that
+`.github/workflows/deploy.yml` runs on this Mac's runner (`~/actions-runner-ai-with-ashish`) on every push to main that
 changes app.py, src/, the Dockerfile, k8s/ or the workflow (or by hand: Actions > Deploy chat-api > Run workflow).
 It builds `chat-api:v<run>-<sha>` inside minikube, applies k8s/chat-api.yaml, sets the image and waits for the
 rollout. The launchd port-forward (127.0.0.1:5050) reconnects by itself a few seconds after.
@@ -151,7 +151,7 @@ rollout. The launchd port-forward (127.0.0.1:5050) reconnects by itself a few se
 Register the runner once (token: GitHub > AIwithAshish > Settings > Actions > Runners > New self-hosted runner,
 valid for an hour):
 ```bash
-mkdir -p ~/actions-runner-ai-chat && cd ~/actions-runner-ai-chat
+mkdir -p ~/actions-runner-ai-with-ashish && cd ~/actions-runner-ai-with-ashish
 tar xzf ~/actions-runner-ai-authz/actions-runner-osx-arm64-*.tar.gz
 ./config.sh --url https://github.com/ashishsober/AIwithAshish --token <TOKEN> --name Ashishs-Mac-Studio --unattended
 ./svc.sh install && ./svc.sh start

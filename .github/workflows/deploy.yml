@@ -22,7 +22,7 @@ env:
 
 jobs:
   build:
-    # Runs on the self-hosted runner installed on the machine that hosts minikube (~/actions-runner-ai-chat)
+    # Runs on the self-hosted runner installed on the machine that hosts minikube (~/actions-runner-ai-with-ashish)
     runs-on: [self-hosted, macOS]
     outputs:
       image: ${{ steps.tag.outputs.image }}
