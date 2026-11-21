@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS chat_db.plans (
 ) ENGINE=InnoDB;
 
 INSERT IGNORE INTO chat_db.plans (code, name, daily_questions, weekly_questions, description, sort_order, requestable) VALUES
-  ('free', 'Free', 25,  100,  'Everyone starts here: enough to try Qwen Chat every day.', 10, 0),
+  ('free', 'Free', 25,  100,  'Everyone starts here: enough to try Ramen Chat every day.', 10, 0),
   ('plus', 'Plus', 100, 400,  'For daily use: notes, hand reviews and code questions.',    20, 1),
   ('pro',  'Pro',  300, 1200, 'For heavy use through the day.',                            30, 1);
 

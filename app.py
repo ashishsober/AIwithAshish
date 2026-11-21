@@ -400,7 +400,7 @@ def _admin_call(call, mutate: bool = False):
         return _error("Not available here.", 404)
     try:
         if not authz_client.is_super_admin(user):
-            return _error("Only a super admin can manage Qwen Chat plans.", 403)
+            return _error("Only a super admin can manage Ramen Chat plans.", 403)
     except authz_client.AuthzUnavailable:
         return _error("The authorization service is not reachable.", 503)
     if mutate and request.headers.get("X-Requested-With") != CSRF_HEADER_VALUE:
@@ -408,7 +408,7 @@ def _admin_call(call, mutate: bool = False):
     try:
         return call(user)
     except StoreUnavailable:
-        return _error("Qwen Chat plans are unavailable right now.", 503)
+        return _error("Ramen Chat plans are unavailable right now.", 503)
 
 
 @app.get("/api/chat/admin/overview")
